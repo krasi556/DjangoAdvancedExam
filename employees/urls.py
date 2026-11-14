@@ -22,5 +22,6 @@ urlpatterns = [
     ])),
     path('skills-menu/', views.show_skills, name='skills-menu'),
     path('add-skill/', views.AddSkill.as_view(), name='add-skill'),
-    path('employee-data/', views.ViewEmployees.as_view(), name='employee-data')
+    path('employees-data/', views.ViewEmployees.as_view(), name='employees-data'),
+    path('employee-data-<int:employee_id>/',views.ViewEmployee.as_view(), name ='employee-data')
 ]
