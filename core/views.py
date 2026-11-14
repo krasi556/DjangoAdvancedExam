@@ -1,0 +1,43 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
+from core.forms import TotallyLegitForm
+from employees.models import Employee
+
+
+# Create your views here.
+
+def load_main_page(request):
+    top_employee = Employee.objects.get_top_rated()
+    users = get_user_model().objects.all().count()
+    user = request.user 
+    context = {
+        'employee': top_employee,
+        'user': user,
+        'users':users
+    }
+
+    return render(request, 'core/main-page.html', context)
+
+
+def handle_error404(request, exception):
+    return render(request, '404.html', status=404)
+
+
+def redirect_to_main_page(request):
+    return redirect('core:load-main-page')
+
+
+def load_about_us(request):
+    return render(request, 'core/about-us.html')
+
+
+def contact_us(request):
+    form = TotallyLegitForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        return redirect('core:load-main-page')
+    context = {
+        'form': form
+    }
+    return render(request, 'core/contact-us.html', context)

@@ -1,0 +1,226 @@
+.confirm-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+.confirm-overlay:target { display: flex; }
+
+.confirm-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 380px;
+    text-align: center;
+}
+
+form div { margin-bottom: 1rem; }
+form .helptext { display: block; font-size: 0.85rem; color: #6c757d; }
+form .errorlist { color: #dc3545; list-style: none; padding: 0; margin: 0 0 0.25rem; }
+
+.employee-photo {
+    max-width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.custom-container {
+    width: 100%;
+    max-width: 1600px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.custom-nav-link {
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #212529;
+    transition: color 0.2s ease-in-out;
+    padding: 0.5rem 1rem;
+}
+
+.custom-nav-link:hover {
+    color: #0d6efd;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+
+.review-form textarea {
+    resize: both;
+}
+
+/* ---------- Skills page ---------- */
+.skills-page {
+    max-width: 900px;
+}
+
+.skills-page .card {
+    border-radius: 0.75rem;
+}
+
+.skills-search div {
+    margin-bottom: 0;
+}
+
+.skills-search label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.skills-search input {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 1rem 0.65rem 2.6rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.skills-search input:focus {
+    outline: none;
+    background: #fff;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+details[open] {
+    background-color: #e2e8f0;
+}
+
+.skills-search-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #6c757d;
+}
+
+.skills-list {
+    overflow: hidden;
+}
+
+.skill-item + .skill-item {
+    border-top: 1px solid #e9ecef;
+}
+
+.skill-item summary {
+    cursor: pointer;
+    list-style: none;
+}
+
+.skill-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.skill-item summary:hover {
+    background: #f8f9fa;
+}
+
+.skill-item summary::after {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-right: 0.4rem;
+    border-top: 2px solid #6c757d;
+    border-right: 2px solid #6c757d;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.skill-item details[open] summary::after {
+    transform: rotate(135deg);
+}
+
+.skill-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f3f5;
+    border-radius: 0.5rem;
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.skill-employees {
+    padding: 0 1rem 1rem calc(1rem + 40px + 1rem);
+}
+
+.skills-checkboxes form {
+    margin: 0;
+}
+
+.skills-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.skills-checkboxes label:hover {
+    border-color: #0d6efd;
+}
+
+.skills-checkboxes label:has(input:checked) {
+    background: #e7f1ff;
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.skills-checkboxes input[type="checkbox"] {
+    accent-color: #0d6efd;
+}
+
+.main-bg {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        url('Gemini_Generated_Image_j21cvnj21cvnj21c.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.navbar .custom-nav-link {
+    color: #f8f9fa;
+}
+
+.navbar .custom-nav-link:hover {
+    color: #6ea8fe;
+}

@@ -1,0 +1,21 @@
+{% if not review_check %}
+    <div class="d-flex gap-4 py-3">
+        {% if employee.is_available %}
+            <form method="POST" action="{% url 'employees:hire-employee' employee.id %}">
+                {% csrf_token %}
+                <button class="btn btn-success">Hire</button>
+            </form>
+        {% endif %}
+        <a class="btn btn-outline-primary" href="{% url 'employees:edit-employee-review' employee.id %}?review_check=True"> {# butona za review #}
+            Leave a review
+        </a>
+        <a class="btn btn-outline-secondary" href="{% url 'employees:edit' employee.id %}">Edit employee</a>
+        <a class="btn btn-outline-secondary" href="{% url 'reviews:current-employee-reviews' employee.id %}">Check
+            reviews</a>
+        <a class="btn btn-danger ms-auto me-3 py-2" href="{% url 'employees:delete' employee.id %}">Delete Employee</a>
+    </div>
+{% else %}
+    {% include 'reviews/leave-a-review.html' %}
+{% endif %}
+
+{# THIS IS THE BUTTON FIELD IN THE FOCUSED EMPLOYEE TAB !!!  #}

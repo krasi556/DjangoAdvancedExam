@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <a href="{% url 'accounts:password-reset' %}">reset password</a>
+        <a href="{% url 'accounts:password-change' %}">Change passwrod</a>
+        <a href="{% url 'accounts:user-reviews' %}">My reviews</a>
+        <a href="#">Edit profile</a>
+        <a href={% url 'accounts:delete-user' %}>Delete profile</a>
+    </div>
+    <div>
+        <p>Full name:{{ user.profile.full_name|default:'Anonymous' }}</p>
+        <p>About myself: {{ user.profile.bio|default:'Nothing yet' }}</p>
+        {% if user.profile.profile_pic %}
+            <img src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
+        {% else %}
+            <p>Nothing yet</p>
+        {% endif %}
+        <p>Created at {{ user.profile.created_at }}</p>
+        <p>Total rating: {{ avg_rating }}</p>
+        <p>Total reviews: {{ reviews_count }}</p>
+    </div>
+
+
+{% endblock %}

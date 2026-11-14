@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Page not found error 404 {% endblock %}
+
+{% block content %}
+    <p>Oops seems the AI agent didn't think about this outcome, page not found</p>
+    <a href="{% url 'core:redirect-home' %}">
+        <button>Back to homepage</button>
+    </a>
+{% endblock %}
