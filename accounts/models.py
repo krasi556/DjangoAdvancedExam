@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
 
+
 # from accounts.managers import NewUserManager
 
 
@@ -14,6 +15,9 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
+
+    is_vip = models.BooleanField(default=False)
+
     user = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -25,7 +29,9 @@ class Profile(models.Model):
 
     @property
     def full_name(self):
-        return f"{self.first_name}  {self.last_name}" or None
+        if not self.first_name and not self.last_name:
+            return None
+        return f'{self.first_name} {self.last_name}'
 
     bio = models.TextField(null=True)
     date_of_birth = models.DateField(
@@ -38,7 +44,6 @@ class Profile(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     rating = models.PositiveIntegerField(default=0)
-
 
 # class NewUser(AbstractBaseUser, PermissionsMixin):
 #

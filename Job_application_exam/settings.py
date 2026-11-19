@@ -34,6 +34,7 @@ ADDITIONAL_APPS = [
     'reviews',
     'employees',
     'accounts',
+    'members'
 
 
 

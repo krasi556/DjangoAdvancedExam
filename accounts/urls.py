@@ -37,5 +37,6 @@ urlpatterns = [
         template_name='account/password-change-done.html'
     ), name='password-change-done'),
     path('user-reviews/', views.user_reviews, name ='user-reviews'),
-    path('delete-user/',views.DeleteUserProfile.as_view(),name='delete-user')
+    path('delete-user/',views.DeleteUserProfile.as_view(),name='delete-user'),
+
 ]

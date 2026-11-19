@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 
 from django.views.generic import DeleteView, UpdateView, CreateView, DetailView, ListView
 from rest_framework import status
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
 from rest_framework.views import APIView
@@ -191,40 +192,49 @@ class AddSkill(CreateView):
         return context
 
 
-class ViewEmployees(APIView):
-    def get(self, request):
-        employees = Employee.objects.all()
-        serializer = EmployeeSerializer(employees, many=True)
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+class ViewEmployees(ListCreateAPIView):
+    # def get(self, request):
+    #     employees = Employee.objects.all()
+    #     serializer = EmployeeSerializer(employees, many=True)
+    #     return Response(data=serializer.data, status=status.HTTP_200_OK)
+    #
+    # def post(self, request):
+    #     serializer = EmployeeSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(data=serializer.data, status=HTTP_201_CREATED)
 
-    def post(self, request):
-        serializer = EmployeeSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(data=serializer.data, status=HTTP_201_CREATED)
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+class ViewEmployee(RetrieveUpdateDestroyAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+    lookup_url_kwarg = 'employee_id'
 
 
-class ViewEmployee(APIView):
-    def get(self, request, employee_id):
-        employees = get_object_or_404(Employee, pk=employee_id)
-        serializer = EmployeeSerializer(employees)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-    def put(self, request,employee_id):
-        employee = get_object_or_404(Employee, pk=employee_id)
-        serializer = EmployeeSerializer(employee, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(data=serializer.data, status=HTTP_201_CREATED)
-
-    def patch(self, request,employee_id):
-        employee = get_object_or_404(Employee, pk=employee_id)
-        serializer = EmployeeSerializer(employee, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True, )
-        serializer.save()
-        return Response(data=serializer.data, status=HTTP_201_CREATED)
-
-    def delete(self, request, employee_id):
-        employee = get_object_or_404(Employee, pk=employee_id)
-        employee.delete()
-        return Response(status=HTTP_204_NO_CONTENT)
+    # def get(self, request, employee_id):
+    #     employees = get_object_or_404(Employee, pk=employee_id)
+    #     serializer = EmployeeSerializer(employees)
+    #     return Response(data=serializer.data, status=status.HTTP_200_OK)
+    #
+    # def put(self, request,employee_id):
+    #     employee = get_object_or_404(Employee, pk=employee_id)
+    #     serializer = EmployeeSerializer(employee, data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(data=serializer.data, status=HTTP_201_CREATED)
+    #
+    # def patch(self, request,employee_id):
+    #     employee = get_object_or_404(Employee, pk=employee_id)
+    #     serializer = EmployeeSerializer(employee, data=request.data, partial=True)
+    #     serializer.is_valid(raise_exception=True, )
+    #     serializer.save()
+    #     return Response(data=serializer.data, status=HTTP_201_CREATED)
+    #
+    # def delete(self, request, employee_id):
+    #     employee = get_object_or_404(Employee, pk=employee_id)
+    #     employee.delete()
+    #     return Response(status=HTTP_204_NO_CONTENT)
+    #
+    #
