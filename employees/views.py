@@ -207,11 +207,11 @@ class ViewEmployees(ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
+
 class ViewEmployee(RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     lookup_url_kwarg = 'employee_id'
-
 
     # def get(self, request, employee_id):
     #     employees = get_object_or_404(Employee, pk=employee_id)

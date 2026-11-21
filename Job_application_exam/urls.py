@@ -18,6 +18,23 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from drf_spectacular.views import SpectacularSwaggerView, SpectacularRedocView, SpectacularAPIView
+
+swagger = [
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+
+    path(
+        'api/schema/swagger-ui/',
+        SpectacularSwaggerView.as_view(url_name='schema'),
+        name='swagger-ui',
+    ),
+
+    path(
+        'api/schema/redoc/',
+        SpectacularRedocView.as_view(url_name='schema'),
+        name='redoc',
+    ),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +42,8 @@ urlpatterns = [
     path('employees/', include('employees.urls')),
     path('reviews/', include('reviews.urls')),
     path('accounts/',include('accounts.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + swagger
 
 handler404 = 'core.views.handle_error404'
 
