@@ -15,6 +15,10 @@ from employees.managers import EmployeeTopManager
 # Create your models here.
 
 class Employee(models.Model):
+
+    """
+    thios will be for every IT employee
+    """
     objects = EmployeeTopManager()
 
     class ProfessionChoices(models.TextChoices):

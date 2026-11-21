@@ -11,10 +11,16 @@ from django.db import models
 
 
 class User(AbstractUser):
+    nickname = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
 
 
 class Profile(models.Model):
+
+    """
+    this will be for the basic profile that everyone will have it
+
+    """
 
     is_vip = models.BooleanField(default=False)
 
