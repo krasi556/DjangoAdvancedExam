@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.db import transaction
 from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 
@@ -59,6 +60,7 @@ class UserWriteSerialize(serializers.ModelSerializer):
 class EmployeeWriteSerialize(serializers.ModelSerializer):
     user = UserWriteSerialize(required=False, allow_null=True)
 
+    @transaction.atomic
     def create(self, validated_data):
         current_skills = validated_data.pop('skills', [])
         user_data = validated_data.pop('user', None)
