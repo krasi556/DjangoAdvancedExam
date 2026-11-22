@@ -42,6 +42,7 @@ urlpatterns = [
     path('employees/', include('employees.urls')),
     path('reviews/', include('reviews.urls')),
     path('accounts/',include('accounts.urls')),
+    path('api/',include('members.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + swagger
 

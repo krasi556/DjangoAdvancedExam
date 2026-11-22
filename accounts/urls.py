@@ -39,4 +39,5 @@ urlpatterns = [
     path('user-reviews/', views.user_reviews, name ='user-reviews'),
     path('delete-user/',views.DeleteUserProfile.as_view(),name='delete-user'),
 
+
 ]
