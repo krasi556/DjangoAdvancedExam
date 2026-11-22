@@ -1,14 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button>Login</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Login | Hire an IT 'Expert'{% endblock %}
+
+{% block body_class %}main-bg{% endblock %}
+{% block content %}
+    <div class="row justify-content-center py-5">
+        <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold mb-2">Welcome Back! (unfortunately) </h2>
+                        <p class="text-muted mb-0">
+                            Log in to your account and find your next IT expert.
+                        </p>
+                    </div>
+                    <form method="post" class="login-form">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-primary w-100 py-2 mt-3">
+                            Login
+                        </button>
+                    </form>
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-0">
+                            Don't have an account?
+                            <a href="{% url 'accounts:register' %}"
+                               class="text-primary text-decoration-none fw-semibold">
+                                Register here
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

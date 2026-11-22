@@ -41,7 +41,7 @@ form .errorlist { color: #dc3545; list-style: none; padding: 0; margin: 0 0 0.25
     font-weight: 600;
     color: #212529;
     transition: color 0.2s ease-in-out;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.9rem;
 }
 
 .custom-nav-link:hover {
@@ -223,4 +223,25 @@ details[open] {
 
 .navbar .custom-nav-link:hover {
     color: #6ea8fe;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.login-form input:not([type="checkbox"]):not([type="hidden"]) {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
