@@ -25,13 +25,16 @@ class UserWriteSerialize(serializers.ModelSerializer):
             try:
                 user_id = int(user_id)
             except (ValueError, TypeError):
-                raise ValidationError({'user':'must be a number'})
+                raise ValidationError({'user': 'must be a number'})
             try:
                 attrs['user_instance'] = UserModel.objects.get(pk=user_id)
             except UserModel.DoesNotExist:
                 raise ValidationError("doesnt exist")
         elif not attrs.get('password'):
             raise ValidationError({'password': 'Password is required when creating a new user.'})
+        elif not attrs.get('username'):
+            raise ValidationError({'username': 'username is required when creating a new user.'})
+
         return attrs
 
     def create(self, validated_data):
@@ -55,6 +58,15 @@ class UserWriteSerialize(serializers.ModelSerializer):
 
 class EmployeeWriteSerialize(serializers.ModelSerializer):
     user = UserWriteSerialize(required=False, allow_null=True)
+
+    def create(self, validated_data):
+        current_skills = validated_data.pop('skills', [])
+        user_data = validated_data.pop('user', None)
+        user = self.fields['user'].create(user_data) if user_data else None
+        employee = Employee.objects.create(user=user, **validated_data)
+        if current_skills:
+            employee.skills.set(current_skills)
+        return employee
 
     class Meta:
         model = Employee
