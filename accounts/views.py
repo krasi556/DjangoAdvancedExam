@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import Permission, User
-from django.contrib.auth.views import redirect_to_login, logout_then_login, PasswordResetView, LoginView
+from django.contrib.auth.views import redirect_to_login, logout_then_login, PasswordResetView, LoginView, LogoutView
 from django.db.models import Avg, Count
 from django.shortcuts import render, redirect
 from django.template.context_processors import request
@@ -53,13 +53,12 @@ def register_view(request):
 #     return render(request, 'account/login.html', context)
 
 class Login(LoginView):
-    success_url = 'core:redirect-home'
+    next_page = 'core:redirect-home'
     template_name = 'account/login.html'
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('core:redirect-home')
+class Logout(LogoutView):
+    next_page = 'core:redirect-home'
 
 
 def profile_view(request):
@@ -96,4 +95,3 @@ class DeleteUserProfile(DeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user
-

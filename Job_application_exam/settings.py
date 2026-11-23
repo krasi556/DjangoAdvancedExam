@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -36,21 +36,19 @@ ADDITIONAL_APPS = [
     'accounts',
     'members'
 
-
-
 ]
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'drf_spectacular',
-] + ADDITIONAL_APPS
+                     'django.contrib.admin',
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'django.contrib.sessions',
+                     'django.contrib.messages',
+                     'django.contrib.staticfiles',
+                     'rest_framework',
+                     'drf_spectacular',
+                 ] + ADDITIONAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,11 +61,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-}
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_SCHEMA_CLASS': ['drf_spectacular.openapi.AutoSchema'],
 
+}
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Exam API',
@@ -95,7 +99,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Job_application_exam.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -128,7 +131,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME':'accounts.validators.PasswordMustBeOfUnique'
+        'NAME': 'accounts.validators.PasswordMustBeOfUnique'
     },
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -169,8 +172,6 @@ EMAIL_HOST_USER = os.getenv('MAILJET_API_KEY')
 EMAIL_HOST_PASSWORD = os.getenv('MAILJET_SECRET_KEY')
 EMAIL_PORT = 587
 COMPANY_EMAIL = os.getenv('COMPANY_EMAIL')
-
-
 
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'core:redirect-home'

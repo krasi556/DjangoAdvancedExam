@@ -3,13 +3,14 @@ from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, 
 from django.urls import path, reverse_lazy
 
 from accounts import views
+from accounts.views import Logout
 
 app_name = 'accounts'
 
 urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('login/',views.Login.as_view(), name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('logout/', Logout.as_view(), name='logout'),
     path('profile/', views.profile_view, name='profile'),
     path('password-reset/', PasswordResetView.as_view(  # sends it to the email  MUST INCLUDE EMAIL HTML
         email_template_name='account/password-reset-email.html',
