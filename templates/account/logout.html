@@ -5,9 +5,9 @@
     <title>logout</title>
 </head>
 <body>
-<form method="post" >
+<form method="post" action=" {% url 'accounts:logout' %}">
     {% csrf_token %}
-    <button >Logout</button>
+    <button class="nav-link" >Logout</button>
 </form>
 </body>
 </html>
