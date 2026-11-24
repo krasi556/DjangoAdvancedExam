@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
 
 
-# from accounts.managers import NewUserManager
+
 
 
 # Create your models here.
@@ -15,14 +15,31 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-
     """
     this will be for the basic profile that everyone will have it
 
     """
 
-    is_vip = models.BooleanField(default=False)
+    class VipStatus(models.TextChoices):
+        PLEB = 'pleb', 'Pleb'
+        SUPER_SPONSOR = 'super_sponsor', 'Super Sponsor'
+        INNER_CIRCLE = 'inner_circle', 'Inner Circle'
+        NO_LIFER = 'no_lifer' , 'No Lifer'
 
+    tier = models.CharField(
+        max_length=100,
+        default=VipStatus.PLEB,
+        choices=VipStatus.choices
+
+    )
+
+    total_wasted = models.DecimalField(
+        max_digits=9,
+        decimal_places=2,
+        default=0.00
+
+
+    )
     user = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -30,7 +47,8 @@ class Profile(models.Model):
 
     )
     first_name = models.CharField(max_length=100, blank=True)
-    last_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True) \
+
 
     @property
     def full_name(self):

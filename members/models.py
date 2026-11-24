@@ -2,11 +2,12 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
-
+from django.db.models import Sum
 
 # Create your models here.
 
 UserModel = get_user_model()
+
 
 class Endorsement(models.Model):
     sponsor = models.ForeignKey(
@@ -27,3 +28,9 @@ class Endorsement(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True
     )
+
+    class Meta:
+        permissions = [
+            ('can_access_members_tab', 'Can open members tab'),
+            ('can_manage_employees' , 'Can change data of employees')
+        ]
