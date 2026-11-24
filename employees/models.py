@@ -28,6 +28,14 @@ class Employee(models.Model):
         BACK_END_DEVELOPER = 'BACK_END_DEV', 'Back-End Developer'
         MOBILE_DEVELOPER = 'MOBILE_DEV', 'Mobile App Developer'
         GAME_DEVELOPER = 'GAME_DEV', 'Game Developer'
+
+    sponsors = models.ManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        through='members.Endorsement',
+        related_name='sponsored_employees',
+        blank=True
+
+    )
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
