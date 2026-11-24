@@ -28,9 +28,3 @@ class Endorsement(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True
     )
-
-    class Meta:
-        permissions = [
-            ('can_access_members_tab', 'Can open members tab'),
-            ('can_manage_employees' , 'Can change data of employees')
-        ]

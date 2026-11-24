@@ -94,6 +94,9 @@ class Employee(models.Model):
                 violation_error_message='Give a real  bio'
             )
         ]
+        permissions = [
+            ('can_manage_employees', 'Can manage employees')
+        ]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

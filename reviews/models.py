@@ -38,7 +38,7 @@ class Review(models.Model):
     class Meta:
         ordering = ['-created_at']
         permissions = [
-            ('can_edit_views', 'can edit views')
+            ('can_edit_reviews', 'can edit reviews')
         ]
 
     def save(self, *args, **kwargs):
