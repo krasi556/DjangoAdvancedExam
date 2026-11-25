@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.db.models import Sum
 
 from members.models import Endorsement
@@ -20,3 +21,23 @@ def amount_calculation_and_tear_check(instance):
     else:
         tier = 'no_lifer'
     return [tier, total_amount]
+
+
+"""
+this one uses signals 
+"""
+
+
+def tier_choose(instance, tier):
+    user = instance.sponsor
+    if tier == 'pleb':
+        user.groups.set([])
+        return
+    TIER_GROUPS = {
+        'pleb': 'Pleb',
+        'super_sponsor': 'Super Sponsor',
+        'inner_circle': 'Inner Circle',
+        'no_lifer': 'No Lifer'
+    }
+    group_to_add = Group.objects.get(name=TIER_GROUPS.get(tier))
+    user.groups.set([group_to_add])
