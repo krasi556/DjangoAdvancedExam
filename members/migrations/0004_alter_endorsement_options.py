@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0003_create_sponsor_groups'),
+        ('members', '0002_alter_endorsement_options'),
     ]
 
     operations = [
