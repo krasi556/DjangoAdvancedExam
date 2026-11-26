@@ -8,8 +8,7 @@ ModelUser = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
 
-    def validate_password(self,value):
-        pass
+
     class Meta:
         model = ModelUser
         fields = '__all__'

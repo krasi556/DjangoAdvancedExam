@@ -1,25 +1,156 @@
+
 {% extends 'base.html' %}
+
+{% block title %}My Profile | Hire an IT 'Expert'{% endblock %}
+
+{% block body_class %}main-bg{% endblock %}
+
 {% block content %}
-    <div>
-        <a href="{% url 'accounts:password-reset' %}">reset password</a>
-        <a href="{% url 'accounts:password-change' %}">Change passwrod</a>
-        <a href="{% url 'accounts:user-reviews' %}">My reviews</a>
-        <a href="#">Edit profile</a>
-        <a href={% url 'accounts:delete-user' %}>Delete profile</a>
-    </div>
-    <div>
-        <p>Full name:{{ user.profile.full_name|default:'Anonymous' }}</p>
-        <p>About myself: {{ user.profile.bio|default:'Nothing yet' }}</p>
-        {% if user.profile.profile_pic %}
-            <img src="{{ user.profile.profile_pic.url }}" alt="Profile picture">
-        {% else %}
-            <p>Nothing yet</p>
-        {% endif %}
-        <p>Created at {{ user.profile.created_at }}</p>
-        <p>Total rating: {{ avg_rating }}</p>
-        <p>Total reviews: {{ reviews_count }}</p>
-        <p>Tier: {{ user.profile.tier }}</p>
+
+<div class="row g-4">
+
+    <div class="col-12">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+            <div>
+                <h1 class="fw-bold mb-1">My Profile</h1>
+                <p class="text-muted mb-0">
+                    Manage your account and personal information.
+                </p>
+            </div>
+        </div>
     </div>
 
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4 bg-white bg-opacity-75 h-100">
+            <div class="card-body p-4 p-md-5">
+                <h4 class="fw-bold mb-4">Profile information</h4>
+                <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-4 mb-4">
 
+                    {% if user.profile.profile_pic %}
+                        <img
+                                src="{{ user.profile.profile_pic.url }}" alt="Profile picture" class="employee-photo border shadow-sm" style="width: 160px; height: 160px;">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center bg-light border rounded-3 shadow-sm text-secondary fw-bold fs-1 flex-shrink-0"
+                             style="width: 160px; height: 160px;">
+                            {{ user.username|first|upper }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        <h3 class="fw-bold mb-1">
+                            {{ user.profile.full_name|default:'No Full name yet'}}
+                        </h3>
+                        <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                            {{ user.profile.get_tier_display }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+                <div class="mb-4">
+                    <h6 class="fw-bold text-uppercase text-muted small mb-2">
+                        About me
+                    </h6>
+
+                    <p class="mb-0">
+                        {{ user.profile.bio|default:'Nothing yet'}}
+                    </p>
+                </div>
+
+                <hr class="my-4">
+                <div class="row g-3">
+
+                    <div class="col-sm-6">
+                        <p class="text-muted small mb-1">Member since</p>
+                        <p class="fw-semibold mb-0">
+                            {{ user.profile.created_at|date:"d M Y" }}
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="text-muted small mb-1">Account username</p>
+                        <p class="fw-semibold mb-0">
+                            {{ user.username }}
+                        </p>
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+                <h5 class="fw-bold mb-3">My reputation</h5>
+
+                <div class="row g-3">
+
+                    <div class="col-sm-6">
+                        <div class="bg-light rounded-3 p-3 h-100">
+                            <p class="text-muted small mb-1">Average rating given</p>
+                            <h3 class="fw-bold mb-0">
+                                {{ avg_rating|default:"No ratings yet" }}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="bg-light rounded-3 p-3 h-100">
+                            <p class="text-muted small mb-1">Total reviews</p>
+                            <h3 class="fw-bold mb-0">
+                                {{ reviews_count|default:0 }}
+                            </h3>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+
+        <div class="card border-0 shadow-sm rounded-4 bg-white bg-opacity-75">
+            <div class="card-body p-4">
+
+                <h4 class="fw-bold mb-1">Account management</h4>
+                <p class="text-muted small mb-4">
+                    Manage your security and account preferences.
+                </p>
+
+                <div class="d-grid gap-3">
+
+                    <a href="{% url 'accounts:user-reviews' %}"
+                       class="btn btn-outline-primary text-start py-2">
+                        My reviews
+                    </a>
+
+                    <a href="{% url 'accounts:password-change' %}"
+                       class="btn btn-outline-secondary text-start py-2">
+                        Change password
+                    </a>
+
+
+                    <a href="{% url 'accounts:password-reset' %}"
+                       class="btn btn-outline-secondary text-start py-2">
+                        Reset password
+                    </a>
+
+                    <button type="button"
+                            class="btn btn-outline-secondary text-start py-2"
+                            disabled
+                            title="Profile editing is not available yet.">
+                        will be fixing later
+                    </button>
+                </div>
+                <hr class="my-4">
+
+                <h5 class="fw-bold text-danger mb-2">Danger zone</h5>
+                <p class="text-muted small">
+                    Permanently delete your account and associated information.
+                </p>
+                <a href="{% url 'accounts:delete-user' %}"
+                   class="btn btn-outline-danger w-100">
+                    Delete profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
