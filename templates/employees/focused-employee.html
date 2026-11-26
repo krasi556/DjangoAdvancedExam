@@ -25,6 +25,13 @@
                             {{ employee.avg_rating|stars_cont }}
                             </span>
                         </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <form method="POST" action="{% url 'donate' employee.id %}">
+                                {% csrf_token %}
+                                {{ form }}
+                                <button class="btn btn-outline-primary">Donate</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -20,6 +20,8 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularRedocView, SpectacularAPIView
 
+from members.views import EndorsementDonateView
+
 swagger = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
 
@@ -40,9 +42,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('employees/', include('employees.urls')),
+    path('employees/<int:id>/donate/',EndorsementDonateView.as_view(),name='donate'),
     path('reviews/', include('reviews.urls')),
     path('accounts/',include('accounts.urls')),
-    path('api/',include('members.urls'))
+    path('api/',include('members.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + swagger
 

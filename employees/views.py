@@ -18,6 +18,7 @@ from core.views import handle_error404
 from employees.forms import EmployeeBase, DeleteEmployee, EditEmployee, CreateEmployee, SearchForm, SkillCreate
 from employees.models import Employee, Skill
 from employees.serializers import EmployeeSerializer
+from members.forms import EndorsementForm
 from reviews.forms import ReviewForms
 from reviews.models import Review
 
@@ -65,6 +66,7 @@ class FocusedEmployee(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['review_check'] = bool(self.request.GET.get('review_check'))
+        context['form'] = EndorsementForm()
 
         return context
 

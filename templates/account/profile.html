@@ -42,6 +42,9 @@
                         <span class="badge rounded-pill text-bg-primary px-3 py-2">
                             {{ user.profile.get_tier_display }}
                         </span>
+                                                <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                            Spent: {{ user.profile.total_wasted|default:'Nothing yet,unfortunately ' }}
+                        </span>
                     </div>
 
                 </div>

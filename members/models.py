@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import Sum
 
@@ -23,7 +23,8 @@ class Endorsement(models.Model):
     amount = models.DecimalField(
         max_digits=9,
         decimal_places=2,
-        validators=[MinValueValidator(1)]
+        validators=[MinValueValidator(1, message="Even satire has standards"),
+                    MaxValueValidator(500000, message="Woah there big spender")]
     )
     created_at = models.DateTimeField(
         auto_now_add=True

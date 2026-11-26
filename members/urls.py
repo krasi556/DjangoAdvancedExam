@@ -5,6 +5,7 @@ from members.views import EmployeeViewSet
 
 router = DefaultRouter()
 
-router.register('members',EmployeeViewSet, basename='members')
+router.register('members', EmployeeViewSet, basename='members')
+
 
 urlpatterns = router.urls
