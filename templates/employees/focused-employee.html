@@ -28,7 +28,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <form method="POST" action="{% url 'donate' employee.id %}">
                                 {% csrf_token %}
-                                {{ form }}
+                                {{ donate_form }}
                                 <button class="btn btn-outline-primary">Donate</button>
                             </form>
                         </li>

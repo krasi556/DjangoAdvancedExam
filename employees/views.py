@@ -66,7 +66,7 @@ class FocusedEmployee(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['review_check'] = bool(self.request.GET.get('review_check'))
-        context['form'] = EndorsementForm()
+        context['donate_form'] = EndorsementForm()
 
         return context
 
@@ -90,6 +90,7 @@ class LeaveAReview(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['employee'] = self.find_current_employee()
         context['review_check'] = True
+        context['donate_form'] = EndorsementForm()
         return context
 
     def form_valid(self, form):
